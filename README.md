@@ -14,10 +14,58 @@ Acesse a aplicação em funcionamento: [https://fazendas-d01731008967.herokuapp.
 
 ## 📁 Estrutura do Projeto
 
-- `src/`: Contém os arquivos-fonte da aplicação.
-- `requirements.txt`: Lista de dependências do projeto.
-- `Procfile`: Arquivo de configuração para o Heroku.
-- `.gitignore`: Arquivos e pastas ignorados pelo Git.
+```plaintext
+fazendas_app_github/
+│
+├── SCR/
+│   ├── __pycache__/
+│   │   └── __init__.cpython-311.pyc
+│   │
+│   ├── data/
+│   │   ├── areas.json
+│   │   ├── documentos.json
+│   │   ├── fazendas.json
+│   │   ├── grupos.json
+│   │   └── pessoas.json
+│   │
+│   ├── models/
+│   │   ├── __pycache__/
+│   │   │   └── fazenda.cpython-311.pyc
+│   │   ├── fazenda.py
+│   │   └── user.py
+│   │
+│   ├── routes/
+│   │   ├── __pycache__/
+│   │   │   ├── api.cpython-311.pyc
+│   │   │   ├── api_extra.cpython-311.pyc
+│   │   │   ├── api_notificacoes.cpython-311.pyc
+│   │   │   └── web.cpython-311.pyc
+│   │   ├── api.py
+│   │   ├── api_extra.py
+│   │   ├── api_notificacoes.py
+│   │   ├── user.py
+│   │   └── web.py
+│   │
+│   ├── static/
+│   │   ├── css/
+│   │   │   └── styles.css
+│   │   ├── js/
+│   │   │   ├── cadastro.js
+│   │   │   ├── dashboard.js
+│   │   │   └── lembretes.js
+│   │   └── index.html
+│   │
+│   └── templates/
+│       ├── cadastro.html
+│       ├── dashboard.html
+│       └── lembretes.html
+│
+├── __init__.py
+├── main.py
+├── venv/
+├── Procfile
+├── README.md
+└── requirements.txt
 
 ## 📦 Instalação
 
