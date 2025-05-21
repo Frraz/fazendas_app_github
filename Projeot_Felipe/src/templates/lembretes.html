@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lembretes - Controle de Documentação das Fazendas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <div class="text-center mb-4">
+                        <h5 class="text-white">Controle de Documentação</h5>
+                    </div>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dashboard">
+                                <i class="bi bi-speedometer2 me-2"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/cadastro">
+                                <i class="bi bi-file-earmark-plus me-2"></i>
+                                Cadastro
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/lembretes">
+                                <i class="bi bi-bell me-2"></i>
+                                Lembretes
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Central de Lembretes</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group me-2">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" id="btnConfigurarLembretes">
+                                <i class="bi bi-gear me-1"></i>Configurar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filtros -->
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Filtros</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3 mb-3">
+                                        <label for="filtroGrupo" class="form-label">Grupo</label>
+                                        <select class="form-select" id="filtroGrupo">
+                                            <option value="">Todos os Grupos</option>
+                                            <!-- Será preenchido via JavaScript -->
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="filtroPessoa" class="form-label">Produtor</label>
+                                        <select class="form-select" id="filtroPessoa">
+                                            <option value="">Todos os Produtores</option>
+                                            <!-- Será preenchido via JavaScript -->
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="filtroTipoDocumento" class="form-label">Tipo de Documento</label>
+                                        <select class="form-select" id="filtroTipoDocumento">
+                                            <option value="">Todos os Documentos</option>
+                                            <option value="ITR">ITR</option>
+                                            <option value="CCIR">CCIR</option>
+                                            <option value="LAR">LAR</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="filtroPrazo" class="form-label">Prazo de Vencimento</label>
+                                        <select class="form-select" id="filtroPrazo">
+                                            <option value="30">Próximos 30 dias</option>
+                                            <option value="60">Próximos 60 dias</option>
+                                            <option value="90">Próximos 90 dias</option>
+                                            <option value="180">Próximos 180 dias</option>
+                                            <option value="-1">Vencidos</option>
+                                            <option value="0">Todos</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="d-grid">
+                                    <button class="btn btn-primary" id="aplicarFiltros">Aplicar Filtros</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lista de Lembretes -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0">Documentos a Vencer</h5>
+                                <button class="btn btn-sm btn-success" id="btnEnviarTodosLembretes">
+                                    <i class="bi bi-envelope me-1"></i>Enviar Todos os Lembretes
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Fazenda</th>
+                                                <th>Produtor</th>
+                                                <th>Grupo</th>
+                                                <th>Documento</th>
+                                                <th>Vencimento</th>
+                                                <th>Dias Restantes</th>
+                                                <th>Status</th>
+                                                <th>Ações</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tabelaLembretes">
+                                            <!-- Será preenchido via JavaScript -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Histórico de Notificações -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Histórico de Notificações</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Data</th>
+                                                <th>Destinatário</th>
+                                                <th>Assunto</th>
+                                                <th>Documento</th>
+                                                <th>Status</th>
+                                                <th>Ações</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tabelaHistorico">
+                                            <!-- Será preenchido via JavaScript -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal de Configuração de Lembretes -->
+    <div class="modal fade" id="modalConfiguracao" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Configuração de Lembretes</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formConfiguracao">
+                        <div class="mb-3">
+                            <label for="emailPadrao" class="form-label">E-mail Padrão para Notificações</label>
+                            <input type="email" class="form-control" id="emailPadrao">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Enviar Lembretes Automáticos</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="lembrete30dias" checked>
+                                <label class="form-check-label" for="lembrete30dias">
+                                    30 dias antes do vencimento
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="lembrete15dias" checked>
+                                <label class="form-check-label" for="lembrete15dias">
+                                    15 dias antes do vencimento
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="lembrete7dias" checked>
+                                <label class="form-check-label" for="lembrete7dias">
+                                    7 dias antes do vencimento
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="lembreteVencido">
+                                <label class="form-check-label" for="lembreteVencido">
+                                    No dia do vencimento
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btnSalvarConfiguracao">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Envio de Notificação -->
+    <div class="modal fade" id="modalNotificacao" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Enviar Notificação</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formNotificacao">
+                        <input type="hidden" id="documentoId">
+                        <div class="mb-3">
+                            <label for="emailDestinatario" class="form-label">E-mail do Destinatário</label>
+                            <input type="email" class="form-control" id="emailDestinatario" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="assuntoEmail" class="form-label">Assunto</label>
+                            <input type="text" class="form-control" id="assuntoEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="conteudoEmail" class="form-label">Conteúdo</label>
+                            <textarea class="form-control" id="conteudoEmail" rows="4" required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btnEnviarNotificacao">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/lembretes.js') }}"></script>
+</body>
+</html>

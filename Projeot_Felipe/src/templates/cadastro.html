@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Controle de Documentação das Fazendas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <div class="text-center mb-4">
+                        <h5 class="text-white">Controle de Documentação</h5>
+                    </div>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dashboard">
+                                <i class="bi bi-speedometer2 me-2"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/cadastro">
+                                <i class="bi bi-file-earmark-plus me-2"></i>
+                                Cadastro
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/lembretes">
+                                <i class="bi bi-bell me-2"></i>
+                                Lembretes
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Central de Cadastro</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group me-2">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" id="btnVoltar">
+                                <i class="bi bi-arrow-left me-1"></i>Voltar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Abas de Cadastro -->
+                <ul class="nav nav-tabs mb-4" id="cadastroTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="fazenda-tab" data-bs-toggle="tab" data-bs-target="#fazenda" type="button" role="tab" aria-controls="fazenda" aria-selected="true">Fazenda</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="produtor-tab" data-bs-toggle="tab" data-bs-target="#produtor" type="button" role="tab" aria-controls="produtor" aria-selected="false">Produtor</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="grupo-tab" data-bs-toggle="tab" data-bs-target="#grupo" type="button" role="tab" aria-controls="grupo" aria-selected="false">Grupo</button>
+                    </li>
+                </ul>
+
+                <!-- Conteúdo das Abas -->
+                <div class="tab-content" id="cadastroTabsContent">
+                    <!-- Aba de Fazenda -->
+                    <div class="tab-pane fade show active" id="fazenda" role="tabpanel" aria-labelledby="fazenda-tab">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0" id="tituloFormFazenda">Nova Fazenda</h5>
+                            </div>
+                            <div class="card-body">
+                                <form id="formFazenda">
+                                    <input type="hidden" id="fazendaId">
+                                    
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="fazendaNome" class="form-label">Nome da Fazenda *</label>
+                                            <input type="text" class="form-control" id="fazendaNome" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="fazendaTipo" class="form-label">Tipo</label>
+                                            <select class="form-select" id="fazendaTipo">
+                                                <option value="">Selecione...</option>
+                                                <option value="Própria">Própria</option>
+                                                <option value="Arrendada">Arrendada</option>
+                                                <option value="Parceria">Parceria</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="fazendaGrupo" class="form-label">Grupo</label>
+                                            <select class="form-select" id="fazendaGrupo">
+                                                <option value="">Selecione...</option>
+                                                <!-- Será preenchido via JavaScript -->
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="fazendaPessoa" class="form-label">Produtor</label>
+                                            <select class="form-select" id="fazendaPessoa">
+                                                <option value="">Selecione...</option>
+                                                <!-- Será preenchido via JavaScript -->
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="fazendaDocumentoDominio" class="form-label">Documento de Domínio</label>
+                                            <input type="text" class="form-control" id="fazendaDocumentoDominio">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="fazendaMatricula" class="form-label">Matrícula</label>
+                                            <input type="text" class="form-control" id="fazendaMatricula">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row mb-3">
+                                        <div class="col-md-3">
+                                            <label for="fazendaHectaresDocumento" class="form-label">Hectares (Documento)</label>
+                                            <input type="number" class="form-control" id="fazendaHectaresDocumento" step="0.0001">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="fazendaCarHa" class="form-label">CAR (há)</label>
+                                            <input type="text" class="form-control" id="fazendaCarHa">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="fazendaAreaConsolidada" class="form-label">Área Consolidada (há)</label>
+                                            <input type="number" class="form-control" id="fazendaAreaConsolidada" step="0.0001">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="fazendaAreaUso" class="form-label">Área de Uso/Contrato</label>
+                                            <input type="number" class="form-control" id="fazendaAreaUso" step="0.0001">
+                                        </div>
+                                    </div>
+                                    
+                                    <hr>
+                                    <h5>Documentação</h5>
+                                    
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <label for="fazendaITR" class="form-label">ITR</label>
+                                            <input type="text" class="form-control" id="fazendaITR">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="fazendaVencimentoITR" class="form-label">Vencimento - ITR</label>
+                                            <input type="date" class="form-control" id="fazendaVencimentoITR">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <label for="fazendaCCIR" class="form-label">CCIR</label>
+                                            <input type="text" class="form-control" id="fazendaCCIR">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="fazendaVencimentoCCIR" class="form-label">Vencimento - CCIR</label>
+                                            <input type="date" class="form-control" id="fazendaVencimentoCCIR">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <label for="fazendaLAR" class="form-label">LAR</label>
+                                            <input type="text" class="form-control" id="fazendaLAR">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="fazendaVencimentoLAR" class="form-label">Vencimento - LAR</label>
+                                            <input type="date" class="form-control" id="fazendaVencimentoLAR">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="fazendaProtocoloLAR" class="form-label">Data do Protocolo de LAR</label>
+                                            <input type="date" class="form-control" id="fazendaProtocoloLAR">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <label for="fazendaDeclaracaoTramitacao" class="form-label">Data da Última Declaração de Tramitação</label>
+                                            <input type="date" class="form-control" id="fazendaDeclaracaoTramitacao">
+                                        </div>
+                                    </div>
+                                    
+                                    <hr>
+                                    <h5>Informações de Área</h5>
+                                    
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <label for="fazendaInscricaoEstadual" class="form-label">Inscrição Estadual</label>
+                                            <input type="text" class="form-control" id="fazendaInscricaoEstadual">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="fazendaAreaProdutiva" class="form-label">Área Produtiva (há)</label>
+                                            <input type="number" class="form-control" id="fazendaAreaProdutiva" step="0.0001">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="fazendaCapacidadeProducao" class="form-label">Capacidade de Produção (IE)</label>
+                                            <input type="text" class="form-control" id="fazendaCapacidadeProducao">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row mb-3">
+                                        <div class="col-md-3">
+                                            <label for="fazendaProdes" class="form-label">Prodes</label>
+                                            <select class="form-select" id="fazendaProdes">
+                                                <option value="">Selecione...</option>
+                                                <option value="Sim">Sim</option>
+                                                <option value="Não">Não</option>
+                                                <option value="Consultar">Consultar</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="fazendaHectaresProdes" class="form-label">Hectares de Prodes</label>
+                                            <input type="number" class="form-control" id="fazendaHectaresProdes" step="0.0001">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="fazendaEmbargo" class="form-label">Embargo</label>
+                                            <select class="form-select" id="fazendaEmbargo">
+                                                <option value="">Selecione...</option>
+                                                <option value="Sim">Sim</option>
+                                                <option value="Não">Não</option>
+                                                <option value="Consultar">Consultar</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="fazendaHectaresEmbargo" class="form-label">Hectares de Embargo</label>
+                                            <input type="number" class="form-control" id="fazendaHectaresEmbargo" step="0.0001">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                        <button type="button" class="btn btn-secondary me-md-2" id="btnLimparFazenda">Limpar</button>
+                                        <button type="submit" class="btn btn-primary" id="btnSalvarFazenda">Salvar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Aba de Produtor -->
+                    <div class="tab-pane fade" id="produtor" role="tabpanel" aria-labelledby="produtor-tab">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0" id="tituloFormProdutor">Novo Produtor</h5>
+                            </div>
+                            <div class="card-body">
+                                <form id="formProdutor">
+                                    <input type="hidden" id="produtorId">
+                                    
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="produtorNome" class="form-label">Nome *</label>
+                                            <input type="text" class="form-control" id="produtorNome" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="produtorEmail" class="form-label">E-mail</label>
+                                            <input type="email" class="form-control" id="produtorEmail">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="produtorTelefone" class="form-label">Telefone</label>
+                                            <input type="text" class="form-control" id="produtorTelefone">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                        <button type="button" class="btn btn-secondary me-md-2" id="btnLimparProdutor">Limpar</button>
+                                        <button type="submit" class="btn btn-primary" id="btnSalvarProdutor">Salvar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        <div class="card mt-4">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Lista de Produtores</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Nome</th>
+                                                <th>E-mail</th>
+                                                <th>Telefone</th>
+                                                <th>Ações</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tabelaProdutores">
+                                            <!-- Será preenchido via JavaScript -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Aba de Grupo -->
+                    <div class="tab-pane fade" id="grupo" role="tabpanel" aria-labelledby="grupo-tab">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0" id="tituloFormGrupo">Novo Grupo</h5>
+                            </div>
+                            <div class="card-body">
+                                <form id="formGrupo">
+                                    <input type="hidden" id="grupoId">
+                                    
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="grupoNome" class="form-label">Nome do Grupo *</label>
+                                            <input type="text" class="form-control" id="grupoNome" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                        <button type="button" class="btn btn-secondary me-md-2" id="btnLimparGrupo">Limpar</button>
+                                        <button type="submit" class="btn btn-primary" id="btnSalvarGrupo">Salvar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        <div class="card mt-4">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Lista de Grupos</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Nome</th>
+                                                <th>Ações</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tabelaGrupos">
+                                            <!-- Será preenchido via JavaScript -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/cadastro.js') }}"></script>
+</body>
+</html>

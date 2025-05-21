@@ -1,0 +1,1313 @@
+[
+  {
+    "id": 1,
+    "tipo": "ITR",
+    "numero": "2023",
+    "data_vencimento": "2024-09-30",
+    "fazenda_id": 1
+  },
+  {
+    "id": 2,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 1
+  },
+  {
+    "id": 3,
+    "tipo": "LAR",
+    "numero": "Sim - Em fase de renovação",
+    "data_vencimento": "2023-03-01",
+    "data_protocolo": "2023-12-14",
+    "data_ultima_declaracao": null,
+    "fazenda_id": 1
+  },
+  {
+    "id": 4,
+    "tipo": "ITR",
+    "numero": "2023",
+    "data_vencimento": "2024-09-30",
+    "fazenda_id": 2
+  },
+  {
+    "id": 5,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 2
+  },
+  {
+    "id": 6,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2022-07-21",
+    "data_ultima_declaracao": "2023-12-14",
+    "fazenda_id": 2
+  },
+  {
+    "id": 7,
+    "tipo": "ITR",
+    "numero": "Posse",
+    "data_vencimento": null,
+    "fazenda_id": 3
+  },
+  {
+    "id": 8,
+    "tipo": "CCIR",
+    "numero": "Posse",
+    "data_vencimento": null,
+    "fazenda_id": 3
+  },
+  {
+    "id": 9,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2022-07-25",
+    "data_ultima_declaracao": null,
+    "fazenda_id": 3
+  },
+  {
+    "id": 10,
+    "tipo": "ITR",
+    "numero": "2023",
+    "data_vencimento": "2024-09-30",
+    "fazenda_id": 4
+  },
+  {
+    "id": 11,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 4
+  },
+  {
+    "id": 12,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2021-08-25",
+    "data_ultima_declaracao": "2024-04-10",
+    "fazenda_id": 4
+  },
+  {
+    "id": 13,
+    "tipo": "ITR",
+    "numero": "Posse",
+    "data_vencimento": null,
+    "fazenda_id": 5
+  },
+  {
+    "id": 14,
+    "tipo": "CCIR",
+    "numero": "Posse",
+    "data_vencimento": null,
+    "fazenda_id": 5
+  },
+  {
+    "id": 15,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2022-07-21",
+    "data_ultima_declaracao": null,
+    "fazenda_id": 5
+  },
+  {
+    "id": 16,
+    "tipo": "ITR",
+    "numero": "2017",
+    "data_vencimento": "2024-09-30",
+    "fazenda_id": 6
+  },
+  {
+    "id": 17,
+    "tipo": "CCIR",
+    "numero": "2019",
+    "data_vencimento": "2020-01-01",
+    "fazenda_id": 6
+  },
+  {
+    "id": 18,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": null,
+    "data_ultima_declaracao": null,
+    "fazenda_id": 6
+  },
+  {
+    "id": 19,
+    "tipo": "ITR",
+    "numero": "2024",
+    "data_vencimento": "2025-09-30",
+    "fazenda_id": 7
+  },
+  {
+    "id": 20,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 7
+  },
+  {
+    "id": 21,
+    "tipo": "LAR",
+    "numero": "Sim - Em fase de renovação",
+    "data_vencimento": "2019-08-24",
+    "data_protocolo": "2022-05-20",
+    "data_ultima_declaracao": "2024-04-11",
+    "fazenda_id": 7
+  },
+  {
+    "id": 22,
+    "tipo": "ITR",
+    "numero": "2023",
+    "data_vencimento": "2024-09-30",
+    "fazenda_id": 8
+  },
+  {
+    "id": 23,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 8
+  },
+  {
+    "id": 24,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2023-07-31",
+    "data_ultima_declaracao": "2024-09-18",
+    "fazenda_id": 8
+  },
+  {
+    "id": 25,
+    "tipo": "ITR",
+    "numero": "2023",
+    "data_vencimento": "2024-09-30",
+    "fazenda_id": 9
+  },
+  {
+    "id": 26,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 9
+  },
+  {
+    "id": 27,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2023-12-19",
+    "data_ultima_declaracao": "2024-06-25",
+    "fazenda_id": 9
+  },
+  {
+    "id": 28,
+    "tipo": "ITR",
+    "numero": "2023",
+    "data_vencimento": "2024-09-30",
+    "fazenda_id": 10
+  },
+  {
+    "id": 29,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 10
+  },
+  {
+    "id": 30,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2021-08-26",
+    "data_ultima_declaracao": "2024-04-10",
+    "fazenda_id": 10
+  },
+  {
+    "id": 31,
+    "tipo": "ITR",
+    "numero": "2020",
+    "data_vencimento": "2021-09-30",
+    "fazenda_id": 11
+  },
+  {
+    "id": 32,
+    "tipo": "CCIR",
+    "numero": "2020",
+    "data_vencimento": "2021-01-01",
+    "fazenda_id": 11
+  },
+  {
+    "id": 33,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2021-08-31",
+    "data_ultima_declaracao": "2021-08-31",
+    "fazenda_id": 11
+  },
+  {
+    "id": 34,
+    "tipo": "ITR",
+    "numero": "2024",
+    "data_vencimento": "2025-09-30",
+    "fazenda_id": 12
+  },
+  {
+    "id": 35,
+    "tipo": "CCIR",
+    "numero": "Posse",
+    "data_vencimento": null,
+    "fazenda_id": 12
+  },
+  {
+    "id": 36,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2024-08-24",
+    "data_ultima_declaracao": "2024-08-24",
+    "fazenda_id": 12
+  },
+  {
+    "id": 37,
+    "tipo": "ITR",
+    "numero": "2024",
+    "data_vencimento": "2025-09-30",
+    "fazenda_id": 13
+  },
+  {
+    "id": 38,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 13
+  },
+  {
+    "id": 39,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": null,
+    "data_ultima_declaracao": null,
+    "fazenda_id": 13
+  },
+  {
+    "id": 40,
+    "tipo": "ITR",
+    "numero": "2024",
+    "data_vencimento": "2025-09-30",
+    "fazenda_id": 14
+  },
+  {
+    "id": 41,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 14
+  },
+  {
+    "id": 42,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2019-01-01",
+    "data_ultima_declaracao": "2024-06-13",
+    "fazenda_id": 14
+  },
+  {
+    "id": 43,
+    "tipo": "ITR",
+    "numero": "2024",
+    "data_vencimento": "2025-09-30",
+    "fazenda_id": 15
+  },
+  {
+    "id": 44,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 15
+  },
+  {
+    "id": 45,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2022-06-06",
+    "data_ultima_declaracao": "2024-06-12",
+    "fazenda_id": 15
+  },
+  {
+    "id": 46,
+    "tipo": "ITR",
+    "numero": "2024",
+    "data_vencimento": "2025-09-30",
+    "fazenda_id": 16
+  },
+  {
+    "id": 47,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 16
+  },
+  {
+    "id": 48,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": null,
+    "data_ultima_declaracao": null,
+    "fazenda_id": 16
+  },
+  {
+    "id": 49,
+    "tipo": "ITR",
+    "numero": "2024",
+    "data_vencimento": "2025-09-30",
+    "fazenda_id": 17
+  },
+  {
+    "id": 50,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 17
+  },
+  {
+    "id": 51,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": null,
+    "data_ultima_declaracao": null,
+    "fazenda_id": 17
+  },
+  {
+    "id": 52,
+    "tipo": "ITR",
+    "numero": "2024",
+    "data_vencimento": "2025-09-30",
+    "fazenda_id": 18
+  },
+  {
+    "id": 53,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 18
+  },
+  {
+    "id": 54,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": null,
+    "data_ultima_declaracao": null,
+    "fazenda_id": 18
+  },
+  {
+    "id": 55,
+    "tipo": "ITR",
+    "numero": "2023",
+    "data_vencimento": "2024-09-30",
+    "fazenda_id": 19
+  },
+  {
+    "id": 56,
+    "tipo": "CCIR",
+    "numero": "2023",
+    "data_vencimento": "2024-01-01",
+    "fazenda_id": 19
+  },
+  {
+    "id": 57,
+    "tipo": "LAR",
+    "numero": "Sim",
+    "data_vencimento": "2025-10-31",
+    "data_protocolo": null,
+    "data_ultima_declaracao": null,
+    "fazenda_id": 19
+  },
+  {
+    "id": 58,
+    "tipo": "ITR",
+    "numero": "2023",
+    "data_vencimento": "2024-09-30",
+    "fazenda_id": 20
+  },
+  {
+    "id": 59,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 20
+  },
+  {
+    "id": 60,
+    "tipo": "LAR",
+    "numero": "Sim",
+    "data_vencimento": "2028-03-19",
+    "data_protocolo": null,
+    "data_ultima_declaracao": null,
+    "fazenda_id": 20
+  },
+  {
+    "id": 61,
+    "tipo": "ITR",
+    "numero": "2021",
+    "data_vencimento": "2022-09-30",
+    "fazenda_id": 21
+  },
+  {
+    "id": 62,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 21
+  },
+  {
+    "id": 63,
+    "tipo": "LAR",
+    "numero": "Sim",
+    "data_vencimento": "2028-03-19",
+    "data_protocolo": null,
+    "data_ultima_declaracao": null,
+    "fazenda_id": 21
+  },
+  {
+    "id": 64,
+    "tipo": "ITR",
+    "numero": "2023",
+    "data_vencimento": "2024-09-30",
+    "fazenda_id": 22
+  },
+  {
+    "id": 65,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 22
+  },
+  {
+    "id": 66,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2023-10-06",
+    "data_ultima_declaracao": null,
+    "fazenda_id": 22
+  },
+  {
+    "id": 67,
+    "tipo": "ITR",
+    "numero": "2023",
+    "data_vencimento": "2024-09-30",
+    "fazenda_id": 23
+  },
+  {
+    "id": 68,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 23
+  },
+  {
+    "id": 69,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2023-10-06",
+    "data_ultima_declaracao": null,
+    "fazenda_id": 23
+  },
+  {
+    "id": 70,
+    "tipo": "ITR",
+    "numero": "-",
+    "data_vencimento": null,
+    "fazenda_id": 24
+  },
+  {
+    "id": 71,
+    "tipo": "CCIR",
+    "numero": "2021",
+    "data_vencimento": "2022-01-01",
+    "fazenda_id": 24
+  },
+  {
+    "id": 72,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2024-06-20",
+    "data_ultima_declaracao": null,
+    "fazenda_id": 24
+  },
+  {
+    "id": 73,
+    "tipo": "ITR",
+    "numero": "-",
+    "data_vencimento": null,
+    "fazenda_id": 25
+  },
+  {
+    "id": 74,
+    "tipo": "CCIR",
+    "numero": "2021",
+    "data_vencimento": "2022-01-01",
+    "fazenda_id": 25
+  },
+  {
+    "id": 75,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2024-06-20",
+    "data_ultima_declaracao": null,
+    "fazenda_id": 25
+  },
+  {
+    "id": 76,
+    "tipo": "ITR",
+    "numero": "-",
+    "data_vencimento": null,
+    "fazenda_id": 26
+  },
+  {
+    "id": 77,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 26
+  },
+  {
+    "id": 78,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": null,
+    "data_ultima_declaracao": null,
+    "fazenda_id": 26
+  },
+  {
+    "id": 79,
+    "tipo": "ITR",
+    "numero": "2023",
+    "data_vencimento": "2024-09-30",
+    "fazenda_id": 27
+  },
+  {
+    "id": 80,
+    "tipo": "CCIR",
+    "numero": "-",
+    "data_vencimento": null,
+    "fazenda_id": 27
+  },
+  {
+    "id": 81,
+    "tipo": "LAR",
+    "numero": "Sim",
+    "data_vencimento": "2026-03-27",
+    "data_protocolo": null,
+    "data_ultima_declaracao": null,
+    "fazenda_id": 27
+  },
+  {
+    "id": 82,
+    "tipo": "ITR",
+    "numero": "2024",
+    "data_vencimento": "2025-09-30",
+    "fazenda_id": 28
+  },
+  {
+    "id": 83,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 28
+  },
+  {
+    "id": 84,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2023-09-05",
+    "data_ultima_declaracao": null,
+    "fazenda_id": 28
+  },
+  {
+    "id": 85,
+    "tipo": "ITR",
+    "numero": "2023",
+    "data_vencimento": "2024-09-30",
+    "fazenda_id": 29
+  },
+  {
+    "id": 86,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 29
+  },
+  {
+    "id": 87,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2023-12-19",
+    "data_ultima_declaracao": "2024-06-25",
+    "fazenda_id": 29
+  },
+  {
+    "id": 88,
+    "tipo": "ITR",
+    "numero": "2024",
+    "data_vencimento": "2025-09-30",
+    "fazenda_id": 30
+  },
+  {
+    "id": 89,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 30
+  },
+  {
+    "id": 90,
+    "tipo": "LAR",
+    "numero": "Sim",
+    "data_vencimento": "2026-06-13",
+    "data_protocolo": null,
+    "data_ultima_declaracao": null,
+    "fazenda_id": 30
+  },
+  {
+    "id": 91,
+    "tipo": "ITR",
+    "numero": "2024",
+    "data_vencimento": "2025-09-30",
+    "fazenda_id": 31
+  },
+  {
+    "id": 92,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 31
+  },
+  {
+    "id": 93,
+    "tipo": "LAR",
+    "numero": "Sim",
+    "data_vencimento": "2024-12-17",
+    "data_protocolo": null,
+    "data_ultima_declaracao": null,
+    "fazenda_id": 31
+  },
+  {
+    "id": 94,
+    "tipo": "ITR",
+    "numero": "2024",
+    "data_vencimento": "2025-09-30",
+    "fazenda_id": 32
+  },
+  {
+    "id": 95,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 32
+  },
+  {
+    "id": 96,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2021-10-20",
+    "data_ultima_declaracao": null,
+    "fazenda_id": 32
+  },
+  {
+    "id": 97,
+    "tipo": "ITR",
+    "numero": "2024",
+    "data_vencimento": "2025-09-30",
+    "fazenda_id": 33
+  },
+  {
+    "id": 98,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 33
+  },
+  {
+    "id": 99,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2019-09-19",
+    "data_ultima_declaracao": null,
+    "fazenda_id": 33
+  },
+  {
+    "id": 100,
+    "tipo": "ITR",
+    "numero": "2023",
+    "data_vencimento": "2024-09-30",
+    "fazenda_id": 34
+  },
+  {
+    "id": 101,
+    "tipo": "CCIR",
+    "numero": "2023",
+    "data_vencimento": "2024-01-01",
+    "fazenda_id": 34
+  },
+  {
+    "id": 102,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2021-09-08",
+    "data_ultima_declaracao": "2021-09-08",
+    "fazenda_id": 34
+  },
+  {
+    "id": 103,
+    "tipo": "ITR",
+    "numero": "-",
+    "data_vencimento": null,
+    "fazenda_id": 35
+  },
+  {
+    "id": 104,
+    "tipo": "CCIR",
+    "numero": "-",
+    "data_vencimento": null,
+    "fazenda_id": 35
+  },
+  {
+    "id": 105,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": null,
+    "data_ultima_declaracao": null,
+    "fazenda_id": 35
+  },
+  {
+    "id": 106,
+    "tipo": "ITR",
+    "numero": "2024",
+    "data_vencimento": "2025-09-30",
+    "fazenda_id": 36
+  },
+  {
+    "id": 107,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 36
+  },
+  {
+    "id": 108,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": null,
+    "data_ultima_declaracao": null,
+    "fazenda_id": 36
+  },
+  {
+    "id": 109,
+    "tipo": "ITR",
+    "numero": "2018",
+    "data_vencimento": "2019-09-30",
+    "fazenda_id": 37
+  },
+  {
+    "id": 110,
+    "tipo": "CCIR",
+    "numero": "-",
+    "data_vencimento": null,
+    "fazenda_id": 37
+  },
+  {
+    "id": 111,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2019-09-20",
+    "data_ultima_declaracao": null,
+    "fazenda_id": 37
+  },
+  {
+    "id": 112,
+    "tipo": "ITR",
+    "numero": "2022",
+    "data_vencimento": "2023-09-30",
+    "fazenda_id": 38
+  },
+  {
+    "id": 113,
+    "tipo": "CCIR",
+    "numero": "2023",
+    "data_vencimento": "2024-01-01",
+    "fazenda_id": 38
+  },
+  {
+    "id": 114,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2022-01-01",
+    "data_ultima_declaracao": "2022-12-14",
+    "fazenda_id": 38
+  },
+  {
+    "id": 115,
+    "tipo": "ITR",
+    "numero": "2022",
+    "data_vencimento": "2023-09-30",
+    "fazenda_id": 39
+  },
+  {
+    "id": 116,
+    "tipo": "CCIR",
+    "numero": "2022",
+    "data_vencimento": "2023-01-01",
+    "fazenda_id": 39
+  },
+  {
+    "id": 117,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2022-01-01",
+    "data_ultima_declaracao": "2022-12-14",
+    "fazenda_id": 39
+  },
+  {
+    "id": 118,
+    "tipo": "ITR",
+    "numero": "2023",
+    "data_vencimento": "2024-09-30",
+    "fazenda_id": 40
+  },
+  {
+    "id": 119,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 40
+  },
+  {
+    "id": 120,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": null,
+    "data_ultima_declaracao": null,
+    "fazenda_id": 40
+  },
+  {
+    "id": 121,
+    "tipo": "ITR",
+    "numero": "2024",
+    "data_vencimento": "2025-09-30",
+    "fazenda_id": 41
+  },
+  {
+    "id": 122,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 41
+  },
+  {
+    "id": 123,
+    "tipo": "LAR",
+    "numero": "Sim",
+    "data_vencimento": "2024-10-08",
+    "data_protocolo": null,
+    "data_ultima_declaracao": null,
+    "fazenda_id": 41
+  },
+  {
+    "id": 124,
+    "tipo": "ITR",
+    "numero": "2024",
+    "data_vencimento": "2025-09-30",
+    "fazenda_id": 42
+  },
+  {
+    "id": 125,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 42
+  },
+  {
+    "id": 126,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2023-12-13",
+    "data_ultima_declaracao": "2024-06-11",
+    "fazenda_id": 42
+  },
+  {
+    "id": 127,
+    "tipo": "ITR",
+    "numero": "2024",
+    "data_vencimento": "2025-09-30",
+    "fazenda_id": 43
+  },
+  {
+    "id": 128,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 43
+  },
+  {
+    "id": 129,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2022-02-01",
+    "data_ultima_declaracao": "2024-09-18",
+    "fazenda_id": 43
+  },
+  {
+    "id": 130,
+    "tipo": "ITR",
+    "numero": "2023",
+    "data_vencimento": "2024-09-30",
+    "fazenda_id": 44
+  },
+  {
+    "id": 131,
+    "tipo": "CCIR",
+    "numero": "2023",
+    "data_vencimento": "2024-01-01",
+    "fazenda_id": 44
+  },
+  {
+    "id": 132,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2019-09-12",
+    "data_ultima_declaracao": "2023-08-02",
+    "fazenda_id": 44
+  },
+  {
+    "id": 133,
+    "tipo": "ITR",
+    "numero": "2024",
+    "data_vencimento": "2025-09-30",
+    "fazenda_id": 45
+  },
+  {
+    "id": 134,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 45
+  },
+  {
+    "id": 135,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2020-02-20",
+    "data_ultima_declaracao": "2024-05-16",
+    "fazenda_id": 45
+  },
+  {
+    "id": 136,
+    "tipo": "ITR",
+    "numero": "2024",
+    "data_vencimento": "2025-09-30",
+    "fazenda_id": 46
+  },
+  {
+    "id": 137,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 46
+  },
+  {
+    "id": 138,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": null,
+    "data_ultima_declaracao": "2024-07-09",
+    "fazenda_id": 46
+  },
+  {
+    "id": 139,
+    "tipo": "ITR",
+    "numero": "2024",
+    "data_vencimento": "2025-09-30",
+    "fazenda_id": 47
+  },
+  {
+    "id": 140,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 47
+  },
+  {
+    "id": 141,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2020-07-30",
+    "data_ultima_declaracao": "2024-08-14",
+    "fazenda_id": 47
+  },
+  {
+    "id": 142,
+    "tipo": "ITR",
+    "numero": "2023",
+    "data_vencimento": "2024-09-30",
+    "fazenda_id": 48
+  },
+  {
+    "id": 143,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 48
+  },
+  {
+    "id": 144,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2023-12-14",
+    "data_ultima_declaracao": null,
+    "fazenda_id": 48
+  },
+  {
+    "id": 145,
+    "tipo": "ITR",
+    "numero": "2024",
+    "data_vencimento": "2025-09-30",
+    "fazenda_id": 49
+  },
+  {
+    "id": 146,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 49
+  },
+  {
+    "id": 147,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2023-01-01",
+    "data_ultima_declaracao": "2024-09-25",
+    "fazenda_id": 49
+  },
+  {
+    "id": 148,
+    "tipo": "ITR",
+    "numero": "2021",
+    "data_vencimento": "2022-09-30",
+    "fazenda_id": 50
+  },
+  {
+    "id": 149,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 50
+  },
+  {
+    "id": 150,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2024-10-04",
+    "data_ultima_declaracao": null,
+    "fazenda_id": 50
+  },
+  {
+    "id": 151,
+    "tipo": "ITR",
+    "numero": "2023",
+    "data_vencimento": "2024-09-30",
+    "fazenda_id": 51
+  },
+  {
+    "id": 152,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 51
+  },
+  {
+    "id": 153,
+    "tipo": "LAR",
+    "numero": "Sim",
+    "data_vencimento": "2025-09-01",
+    "data_protocolo": "2021-09-14",
+    "data_ultima_declaracao": null,
+    "fazenda_id": 51
+  },
+  {
+    "id": 154,
+    "tipo": "ITR",
+    "numero": "2021",
+    "data_vencimento": "2022-09-30",
+    "fazenda_id": 52
+  },
+  {
+    "id": 155,
+    "tipo": "CCIR",
+    "numero": "2023",
+    "data_vencimento": "2024-01-01",
+    "fazenda_id": 52
+  },
+  {
+    "id": 156,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2019-11-01",
+    "data_ultima_declaracao": "2023-06-12",
+    "fazenda_id": 52
+  },
+  {
+    "id": 157,
+    "tipo": "ITR",
+    "numero": "2023",
+    "data_vencimento": "2024-09-30",
+    "fazenda_id": 53
+  },
+  {
+    "id": 158,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 53
+  },
+  {
+    "id": 159,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2021-11-05",
+    "data_ultima_declaracao": "2024-09-23",
+    "fazenda_id": 53
+  },
+  {
+    "id": 160,
+    "tipo": "ITR",
+    "numero": "-",
+    "data_vencimento": null,
+    "fazenda_id": 54
+  },
+  {
+    "id": 161,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 54
+  },
+  {
+    "id": 162,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": null,
+    "data_ultima_declaracao": null,
+    "fazenda_id": 54
+  },
+  {
+    "id": 163,
+    "tipo": "ITR",
+    "numero": "2024",
+    "data_vencimento": "2025-09-30",
+    "fazenda_id": 55
+  },
+  {
+    "id": 164,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 55
+  },
+  {
+    "id": 165,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2020-07-30",
+    "data_ultima_declaracao": "2024-07-11",
+    "fazenda_id": 55
+  },
+  {
+    "id": 166,
+    "tipo": "ITR",
+    "numero": "2024",
+    "data_vencimento": "2025-09-30",
+    "fazenda_id": 56
+  },
+  {
+    "id": 167,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 56
+  },
+  {
+    "id": 168,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": "2020-07-30",
+    "data_ultima_declaracao": "2024-04-10",
+    "fazenda_id": 56
+  },
+  {
+    "id": 169,
+    "tipo": "ITR",
+    "numero": "2024",
+    "data_vencimento": "2025-09-30",
+    "fazenda_id": 57
+  },
+  {
+    "id": 170,
+    "tipo": "CCIR",
+    "numero": "2024",
+    "data_vencimento": "2025-01-01",
+    "fazenda_id": 57
+  },
+  {
+    "id": 171,
+    "tipo": "LAR",
+    "numero": "-",
+    "data_vencimento": null,
+    "data_protocolo": null,
+    "data_ultima_declaracao": null,
+    "fazenda_id": 57
+  }
+]
