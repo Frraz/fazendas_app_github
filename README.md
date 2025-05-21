@@ -17,24 +17,24 @@ Acesse a aplicação em funcionamento: [https://fazendas-d01731008967.herokuapp.
 ```plaintext
 fazendas_app_github/
 │
-├── SCR/
+├── SCR/                                                    # Código-fonte principal
 │   ├── __pycache__/
 │   │   └── __init__.cpython-311.pyc
 │   │
-│   ├── data/
+│   ├── data/                                               # Dados de exemplo (mock JSON)
 │   │   ├── areas.json
 │   │   ├── documentos.json
 │   │   ├── fazendas.json
 │   │   ├── grupos.json
 │   │   └── pessoas.json
 │   │
-│   ├── models/
+│   ├── models/                                            # Modelos de dados (ex: fazenda, usuário)
 │   │   ├── __pycache__/
 │   │   │   └── fazenda.cpython-311.pyc
 │   │   ├── fazenda.py
 │   │   └── user.py
 │   │
-│   ├── routes/
+│   ├── routes/                                            # Rotas da aplicação (API e views)
 │   │   ├── __pycache__/
 │   │   │   ├── api.cpython-311.pyc
 │   │   │   ├── api_extra.cpython-311.pyc
@@ -46,7 +46,7 @@ fazendas_app_github/
 │   │   ├── user.py
 │   │   └── web.py
 │   │
-│   ├── static/
+│   ├── static/                                           # Arquivos estáticos (CSS, JS, HTML)
 │   │   ├── css/
 │   │   │   └── styles.css
 │   │   ├── js/
@@ -55,17 +55,17 @@ fazendas_app_github/
 │   │   │   └── lembretes.js
 │   │   └── index.html
 │   │
-│   └── templates/
+│   └── templates/                                       # Templates HTML (Jinja2)
 │       ├── cadastro.html
 │       ├── dashboard.html
 │       └── lembretes.html
 │
-├── __init__.py
-├── main.py
-├── venv/
-├── Procfile
-├── README.md
-└── requirements.txt
+├── __init__.py                                          # Inicialização do pacote
+├── main.py                                              # Ponto de entrada da aplicação
+├── venv/                                                # Ambiente virtual (opcional)
+├── Procfile                                             # Configuração para o Heroku
+├── README.md                                            # Documentação do projeto
+└── requirements.txt                                     # Dependências da aplicação
 
 ## 📦 Instalação
 
