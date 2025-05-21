@@ -3,6 +3,7 @@
 from flask import Blueprint, jsonify, request
 from src.models.fazenda import db, Grupo, Pessoa, Fazenda, Documento, Area, Notificacao
 from datetime import datetime, timedelta
+import logging
 
 api_bp = Blueprint('api', __name__)
 
@@ -223,63 +224,122 @@ def get_estatisticas_documentos():
         'vencimentos': vencimento_count
     })
 
+#####################################################################################################################################################
+
 @api_bp.route('/fazenda', methods=['POST'])
 def create_fazenda():
-    data = request.json
-    
-    # Criar nova fazenda
-    fazenda = Fazenda(
-        nome=data.get('nome'),
-        tipo=data.get('tipo'),
-        documento_dominio=data.get('documento_dominio'),
-        matricula=data.get('matricula'),
-        hectares_documento=data.get('hectares_documento'),
-        car_ha=data.get('car_ha'),
-        area_consolidada_ha=data.get('area_consolidada_ha'),
-        area_uso_contrato=data.get('area_uso_contrato'),
-        grupo_id=data.get('grupo_id'),
-        pessoa_id=data.get('pessoa_id')
-    )
-    
-    db.session.add(fazenda)
-    db.session.flush()
-    
-    # Criar documentos
-    documentos_data = data.get('documentos', [])
-    for doc_data in documentos_data:
-        data_vencimento = None
-        if doc_data.get('data_vencimento'):
-            try:
-                data_vencimento = datetime.strptime(doc_data.get('data_vencimento'), '%Y-%m-%d')
-            except:
-                pass
+    # Iniciar transação explicitamente
+    session = db.session.begin_nested()
+    try:
+        data = request.json
         
-        documento = Documento(
-            tipo=doc_data.get('tipo'),
-            numero=doc_data.get('numero'),
-            data_vencimento=data_vencimento,
-            fazenda_id=fazenda.id
+        # Validação de dados obrigatórios
+        if not data.get('nome'):
+            return jsonify({'error': 'O nome da fazenda é obrigatório'}), 400
+        
+        # Validação de chaves estrangeiras
+        if data.get('grupo_id'):
+            grupo = Grupo.query.get(data.get('grupo_id'))
+            if not grupo:
+                return jsonify({'error': 'Grupo não encontrado'}), 400
+        
+        if data.get('pessoa_id'):
+            pessoa = Pessoa.query.get(data.get('pessoa_id'))
+            if not pessoa:
+                return jsonify({'error': 'Produtor não encontrado'}), 400
+        
+        # Conversão de tipos para campos numéricos
+        try:
+            hectares_documento = float(data.get('hectares_documento')) if data.get('hectares_documento') else None
+            area_consolidada_ha = float(data.get('area_consolidada_ha')) if data.get('area_consolidada_ha') else None
+            area_uso_contrato = float(data.get('area_uso_contrato')) if data.get('area_uso_contrato') else None
+        except ValueError:
+            return jsonify({'error': 'Valores numéricos inválidos nos campos de área'}), 400
+        
+        # Criar nova fazenda com valores convertidos
+        fazenda = Fazenda(
+            nome=data.get('nome'),
+            tipo=data.get('tipo'),
+            documento_dominio=data.get('documento_dominio'),
+            matricula=data.get('matricula'),
+            hectares_documento=hectares_documento,
+            car_ha=data.get('car_ha'),
+            area_consolidada_ha=area_consolidada_ha,
+            area_uso_contrato=area_uso_contrato,
+            grupo_id=data.get('grupo_id'),
+            pessoa_id=data.get('pessoa_id')
         )
-        db.session.add(documento)
+        
+        db.session.add(fazenda)
+        
+        try:
+            db.session.flush()  # Tenta obter o ID da fazenda
+        except Exception as e:
+            db.session.rollback()
+            # Log do erro para depuração
+            print(f"Erro ao criar fazenda: {str(e)}")
+            return jsonify({'error': 'Erro ao criar fazenda. Verifique se já existe uma fazenda com o mesmo nome.'}), 400
+        
+        # Criar documentos
+        documentos_data = data.get('documentos', [])
+        for doc_data in documentos_data:
+            data_vencimento = None
+            if doc_data.get('data_vencimento'):
+                try:
+                    data_vencimento = datetime.strptime(doc_data.get('data_vencimento'), '%Y-%m-%d')
+                except ValueError:
+                    # Continua sem a data, mas registra o erro
+                    print(f"Formato de data inválido: {doc_data.get('data_vencimento')}")
+            
+            documento = Documento(
+                tipo=doc_data.get('tipo'),
+                numero=doc_data.get('numero'),
+                data_vencimento=data_vencimento,
+                fazenda_id=fazenda.id
+            )
+            db.session.add(documento)
+        
+        # Criar área
+        area_data = data.get('area')
+        if area_data:
+            try:
+                area_produtiva_ha = float(area_data.get('area_produtiva_ha')) if area_data.get('area_produtiva_ha') else None
+                hectares_prodes = float(area_data.get('hectares_prodes')) if area_data.get('hectares_prodes') else None
+                hectares_embargo = float(area_data.get('hectares_embargo')) if area_data.get('hectares_embargo') else None
+            except ValueError:
+                return jsonify({'error': 'Valores numéricos inválidos nos campos de área produtiva, prodes ou embargo'}), 400
+            
+            area = Area(
+                inscricao_estadual=area_data.get('inscricao_estadual'),
+                area_produtiva_ha=area_produtiva_ha,
+                capacidade_producao=area_data.get('capacidade_producao'),
+                prodes=area_data.get('prodes'),
+                hectares_prodes=hectares_prodes,
+                embargo=area_data.get('embargo'),
+                hectares_embargo=hectares_embargo,
+                fazenda_id=fazenda.id
+            )
+            db.session.add(area)
+        
+        # Tenta realizar o commit com tratamento de exceção
+        try:
+            db.session.commit()
+            return jsonify({'id': fazenda.id, 'message': 'Fazenda criada com sucesso'}), 201
+        except Exception as e:
+            db.session.rollback()
+            # Log do erro para depuração
+            print(f"Erro ao salvar fazenda: {str(e)}")
+            return jsonify({'error': 'Erro ao salvar fazenda. Por favor, verifique os dados e tente novamente.'}), 500
     
-    # Criar área
-    area_data = data.get('area')
-    if area_data:
-        area = Area(
-            inscricao_estadual=area_data.get('inscricao_estadual'),
-            area_produtiva_ha=area_data.get('area_produtiva_ha'),
-            capacidade_producao=area_data.get('capacidade_producao'),
-            prodes=area_data.get('prodes'),
-            hectares_prodes=area_data.get('hectares_prodes'),
-            embargo=area_data.get('embargo'),
-            hectares_embargo=area_data.get('hectares_embargo'),
-            fazenda_id=fazenda.id
-        )
-        db.session.add(area)
+    except Exception as e:
+        # Tratamento de exceções gerais
+        db.session.rollback()
+        # Log do erro para depuração
+        print(f"Erro não tratado: {str(e)}")
+        return jsonify({'error': 'Ocorreu um erro inesperado. Por favor, tente novamente.'}), 500
     
-    db.session.commit()
+#####################################################################################################################################################
     
-    return jsonify({'id': fazenda.id, 'message': 'Fazenda criada com sucesso'}), 201
 
 @api_bp.route('/notificacao/email', methods=['POST'])
 def enviar_notificacao_email():
@@ -302,3 +362,11 @@ def enviar_notificacao_email():
     db.session.commit()
     
     return jsonify({'id': notificacao.id, 'message': 'Notificação registrada com sucesso'}), 201
+
+# Configuração de logging
+logging.basicConfig(
+    filename='app.log',
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)

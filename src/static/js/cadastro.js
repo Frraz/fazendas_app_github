@@ -255,9 +255,85 @@ function editarGrupo(grupo) {
     bootstrap.Tab.getOrCreateInstance(grupoTab).show();
 }
 
+function validarFormulario() {
+    const nome = document.getElementById('fazendaNome').value;
+    if (!nome) {
+        mostrarErro('O nome da fazenda é obrigatório');
+        return false;
+    }
+    
+    // Validação de campos numéricos
+    const hectaresDocumento = document.getElementById('fazendaHectaresDocumento').value;
+    if (hectaresDocumento && isNaN(parseFloat(hectaresDocumento))) {
+        mostrarErro('O valor de Hectares (Documento) deve ser um número válido');
+        return false;
+    }
+    
+    const areaConsolidada = document.getElementById('fazendaAreaConsolidada').value;
+    if (areaConsolidada && isNaN(parseFloat(areaConsolidada))) {
+        mostrarErro('O valor de Área Consolidada deve ser um número válido');
+        return false;
+    }
+    
+    const areaUso = document.getElementById('fazendaAreaUso').value;
+    if (areaUso && isNaN(parseFloat(areaUso))) {
+        mostrarErro('O valor de Área de Uso/Contrato deve ser um número válido');
+        return false;
+    }
+    
+    // Validação de datas
+    const datasVencimento = [
+        document.getElementById('fazendaVencimentoITR').value,
+        document.getElementById('fazendaVencimentoCCIR').value,
+        document.getElementById('fazendaVencimentoLAR').value
+    ];
+    
+    for (const data of datasVencimento) {
+        if (data && !isValidDate(data)) {
+            mostrarErro('Data de vencimento inválida');
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+function isValidDate(dateString) {
+    const regex = /^\d{4}-\d{2}-\d{2}$/;
+    if (!regex.test(dateString)) return false;
+    
+    const date = new Date(dateString);
+    return date instanceof Date && !isNaN(date);
+}
+
+function mostrarErro(mensagem) {
+    // Cria um elemento de alerta se não existir
+    let alertDiv = document.getElementById('error-message');
+    if (!alertDiv) {
+        alertDiv = document.createElement('div');
+        alertDiv.id = 'error-message';
+        alertDiv.className = 'alert alert-danger mt-3';
+        alertDiv.role = 'alert';
+        document.getElementById('formFazenda').prepend(alertDiv);
+    }
+    
+    alertDiv.textContent = mensagem;
+    alertDiv.style.display = 'block';
+    
+    // Esconde após 5 segundos
+    setTimeout(() => {
+        alertDiv.style.display = 'none';
+    }, 5000);
+}
+
 // Funções de salvamento
 function salvarFazenda(event) {
     event.preventDefault();
+
+    // Validar formulário antes de enviar
+    if (!validarFormulario()) {
+        return; // Interrompe o envio se a validação falhar
+    }
     
     // Coletar dados do formulário
     const fazendaData = {
