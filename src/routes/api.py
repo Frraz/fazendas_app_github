@@ -228,8 +228,6 @@ def get_estatisticas_documentos():
 
 @api_bp.route('/fazenda', methods=['POST'])
 def create_fazenda():
-    # Iniciar transação explicitamente
-    session = db.session.begin_nested()
     try:
         data = request.json
         
@@ -337,6 +335,7 @@ def create_fazenda():
         # Log do erro para depuração
         print(f"Erro não tratado: {str(e)}")
         return jsonify({'error': 'Ocorreu um erro inesperado. Por favor, tente novamente.'}), 500
+
     
 #####################################################################################################################################################
     

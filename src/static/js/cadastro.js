@@ -36,6 +36,20 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+document.getElementById('fazendaNome').addEventListener('input', function() {
+    const nome = this.value;
+    const feedbackElement = document.getElementById('fazendaNomeFeedback');
+    
+    if (!nome) {
+        this.classList.add('is-invalid');
+        feedbackElement.textContent = 'O nome da fazenda é obrigatório';
+    } else {
+        this.classList.remove('is-invalid');
+        this.classList.add('is-valid');
+        feedbackElement.textContent = '';
+    }
+});
+
 // Funções de carregamento de dados
 function carregarGrupos() {
     fetch('/api/grupos')
@@ -298,6 +312,28 @@ function validarFormulario() {
     return true;
 }
 
+// Adicionar validação para o formulário de produtor
+function validarFormularioProdutor() {
+    const nome = document.getElementById('produtorNome').value;
+    if (!nome) {
+        mostrarErroProdutor('O nome do produtor é obrigatório');
+        return false;
+    }
+    
+    const email = document.getElementById('produtorEmail').value;
+    if (email && !isValidEmail(email)) {
+        mostrarErroProdutor('Email inválido');
+        return false;
+    }
+    
+    return true;
+}
+
+function isValidEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+}
+
 function isValidDate(dateString) {
     const regex = /^\d{4}-\d{2}-\d{2}$/;
     if (!regex.test(dateString)) return false;
@@ -325,6 +361,22 @@ function mostrarErro(mensagem) {
         alertDiv.style.display = 'none';
     }, 5000);
 }
+
+// Implementar debounce para inputs
+function debounce(func, wait) {
+    let timeout;
+    return function(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+}
+
+// Aplicar em campos de busca ou filtros
+document.getElementById('campoBusca').addEventListener('input', 
+    debounce(function(e) {
+        // Lógica de busca
+    }, 300)
+);
 
 // Funções de salvamento
 function salvarFazenda(event) {
@@ -420,6 +472,96 @@ function salvarFazenda(event) {
         console.error('Erro ao salvar fazenda:', error);
         alert('Erro ao salvar fazenda. Por favor, tente novamente.');
     });
+}
+
+function salvarProdutor(event) {
+    event.preventDefault();
+    
+    // Coletar dados do formulário
+    const produtorData = {
+        nome: document.getElementById('produtorNome').value,
+        email: document.getElementById('produtorEmail').value,
+        telefone: document.getElementById('produtorTelefone').value
+    };
+    
+    // Enviar dados para o servidor
+    const url = editandoProdutorId ? `/api/pessoa/${editandoProdutorId}` : '/api/pessoa';
+    const method = editandoProdutorId ? 'PUT' : 'POST';
+    
+    fetch(url, {
+        method: method,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(produtorData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(editandoProdutorId ? 'Produtor atualizado com sucesso!' : 'Produtor cadastrado com sucesso!');
+        limparFormularioProdutor();
+        carregarPessoas();
+    })
+    .catch(error => {
+        console.error('Erro ao salvar produtor:', error);
+        alert('Erro ao salvar produtor. Por favor, tente novamente.');
+    });
+}
+
+function salvarGrupo(event) {
+    event.preventDefault();
+    
+    // Coletar dados do formulário
+    const grupoData = {
+        nome: document.getElementById('grupoNome').value
+    };
+    
+    // Enviar dados para o servidor
+    const url = editandoGrupoId ? `/api/grupo/${editandoGrupoId}` : '/api/grupo';
+    const method = editandoGrupoId ? 'PUT' : 'POST';
+    
+    fetch(url, {
+        method: method,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(grupoData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(editandoGrupoId ? 'Grupo atualizado com sucesso!' : 'Grupo cadastrado com sucesso!');
+        limparFormularioGrupo();
+        carregarGrupos();
+    })
+    .catch(error => {
+        console.error('Erro ao salvar grupo:', error);
+        alert('Erro ao salvar grupo. Por favor, tente novamente.');
+    });
+}
+
+// Funções auxiliares
+function formatarDataParaInput(dataString) {
+    const data = new Date(dataString);
+    return data.toISOString().split('T')[0];
+}
+
+
+// Melhoria: Usar componentes de toast ou notificações
+function mostrarSucesso(mensagem) {
+    const toastDiv = document.createElement('div');
+    toastDiv.className = 'toast show position-fixed bottom-0 end-0 m-3';
+    toastDiv.setAttribute('role', 'alert');
+    toastDiv.innerHTML = `
+        <div class="toast-header bg-success text-white">
+            <strong class="me-auto">Sucesso</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+        </div>
+        <div class="toast-body">${mensagem}</div>
+    `;
+    document.body.appendChild(toastDiv);
+    
+    setTimeout(() => {
+        toastDiv.remove();
+    }, 5000);
 }
 
 function salvarProdutor(event) {
