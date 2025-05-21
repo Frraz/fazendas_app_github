@@ -17,24 +17,24 @@ Acesse a aplicação em funcionamento: [https://fazendas-d01731008967.herokuapp.
 ```plaintext
 fazendas_app_github/
 │
-├── SCR/                                                    # Código-fonte principal
+├── SCR/                                                 # Código-fonte principal
 │   ├── __pycache__/
 │   │   └── __init__.cpython-311.pyc
 │   │
-│   ├── data/                                               # Dados de exemplo (mock JSON)
+│   ├── data/                                            # Dados de exemplo (mock JSON)
 │   │   ├── areas.json
 │   │   ├── documentos.json
 │   │   ├── fazendas.json
 │   │   ├── grupos.json
 │   │   └── pessoas.json
 │   │
-│   ├── models/                                            # Modelos de dados (ex: fazenda, usuário)
+│   ├── models/                                          # Modelos de dados (ex: fazenda, usuário)
 │   │   ├── __pycache__/
 │   │   │   └── fazenda.cpython-311.pyc
 │   │   ├── fazenda.py
 │   │   └── user.py
 │   │
-│   ├── routes/                                            # Rotas da aplicação (API e views)
+│   ├── routes/                                          # Rotas da aplicação (API e views)
 │   │   ├── __pycache__/
 │   │   │   ├── api.cpython-311.pyc
 │   │   │   ├── api_extra.cpython-311.pyc
@@ -46,7 +46,7 @@ fazendas_app_github/
 │   │   ├── user.py
 │   │   └── web.py
 │   │
-│   ├── static/                                           # Arquivos estáticos (CSS, JS, HTML)
+│   ├── static/                                          # Arquivos estáticos (CSS, JS, HTML)
 │   │   ├── css/
 │   │   │   └── styles.css
 │   │   ├── js/
