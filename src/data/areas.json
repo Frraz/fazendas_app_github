@@ -625,16 +625,6 @@
     "embargo": "-",
     "hectares_embargo": null,
     "fazenda_id": 57
-  },
-  {
-    "id": 58,
-    "inscricao_estadual": 57,
-    "area_produtiva_ha": null,
-    "capacidade_producao": 360036.502,
-    "prodes": null,
-    "hectares_prodes": null,
-    "embargo": null,
-    "hectares_embargo": null,
-    "fazenda_id": 58
+
   }
 ]

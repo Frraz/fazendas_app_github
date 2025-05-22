@@ -79,6 +79,20 @@ function carregarFazendas() {
         .then(data => {
             dadosFazendas = data;
             atualizarTabelaFazendas();
+            
+            // Calcular totais diretamente dos dados da tabela
+            const totalFazendas = dadosFazendas.length;
+            let totalArea = 0;
+            
+            dadosFazendas.forEach(fazenda => {
+                if (fazenda.hectares_documento) {
+                    totalArea += fazenda.hectares_documento;
+                }
+            });
+            
+            // Atualizar totalizador final com os dados da tabela
+            document.getElementById('totalFazendasFinal').textContent = totalFazendas;
+            document.getElementById('areaTotalFinal').textContent = formatarNumero(totalArea);
         })
         .catch(error => console.error('Erro ao carregar fazendas:', error));
 }
@@ -113,11 +127,58 @@ function carregarEstatisticas() {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            atualizarResumo(data);
-            atualizarGraficoAreas(data);
-            atualizarTotalizadorFinal(data); // Atualiza o totalizador final
+            console.log("Dados recebidos da API:", data); // Log para debug
+            
+            // Verificar se os dados estão no formato esperado
+            if (data.total_fazendas !== undefined) {
+                // Formato correto com as chaves esperadas
+                atualizarResumo(data);
+                atualizarGraficoAreas(data);
+            } else if (data.documento !== undefined) {
+                // Formato antigo, adaptar para o formato esperado
+                const dadosAdaptados = {
+                    total_fazendas: dadosFazendas.length,
+                    total_hectares_documento: data.documento || 0,
+                    total_area_produtiva: data.produtiva || 0,
+                    total_area_consolidada: data.consolidada || 0,
+                    total_area_uso: data.uso_contrato || 0,
+                    total_prodes: data.prodes || 0,
+                    total_embargo: data.embargo || 0
+                };
+                atualizarResumo(dadosAdaptados);
+                atualizarGraficoAreas(dadosAdaptados);
+            } else {
+                // Formato desconhecido, usar dados da tabela
+                const totalFazendas = dadosFazendas.length;
+                let totalArea = 0;
+                let totalAreaProdutiva = 0;
+                
+                dadosFazendas.forEach(fazenda => {
+                    if (fazenda.hectares_documento) {
+                        totalArea += fazenda.hectares_documento;
+                    }
+                    if (fazenda.area && fazenda.area.area_produtiva_ha) {
+                        totalAreaProdutiva += fazenda.area.area_produtiva_ha;
+                    }
+                });
+                
+                const dadosCalculados = {
+                    total_fazendas: totalFazendas,
+                    total_hectares_documento: totalArea,
+                    total_area_produtiva: totalAreaProdutiva
+                };
+                
+                atualizarResumo(dadosCalculados);
+            }
+            
+            // Sempre atualizar o totalizador final com os dados da tabela
+            atualizarTotalizadorFinal();
         })
-        .catch(error => console.error('Erro ao carregar estatísticas de áreas:', error));
+        .catch(error => {
+            console.error('Erro ao carregar estatísticas de áreas:', error);
+            // Em caso de erro, usar dados da tabela
+            atualizarTotalizadorFinal();
+        });
     
     // Carregar estatísticas de documentos
     url = '/api/estatisticas/documentos';
@@ -135,15 +196,24 @@ function carregarEstatisticas() {
 
 // Funções de atualização da interface
 function atualizarResumo(data) {
-    document.getElementById('totalFazendas').textContent = data.total_fazendas;
-    document.getElementById('areaTotal').textContent = formatarNumero(data.total_hectares_documento);
-    document.getElementById('areaProdutiva').textContent = formatarNumero(data.total_area_produtiva);
+    document.getElementById('totalFazendas').textContent = data.total_fazendas || 0;
+    document.getElementById('areaTotal').textContent = formatarNumero(data.total_hectares_documento || 0);
+    document.getElementById('areaProdutiva').textContent = formatarNumero(data.total_area_produtiva || 0);
 }
 
-// Nova função para atualizar o totalizador final
-function atualizarTotalizadorFinal(data) {
-    document.getElementById('totalFazendasFinal').textContent = data.total_fazendas;
-    document.getElementById('areaTotalFinal').textContent = formatarNumero(data.total_hectares_documento);
+// Função para atualizar o totalizador final com base nos dados da tabela
+function atualizarTotalizadorFinal() {
+    const totalFazendas = dadosFazendas.length;
+    let totalArea = 0;
+    
+    dadosFazendas.forEach(fazenda => {
+        if (fazenda.hectares_documento) {
+            totalArea += fazenda.hectares_documento;
+        }
+    });
+    
+    document.getElementById('totalFazendasFinal').textContent = totalFazendas;
+    document.getElementById('areaTotalFinal').textContent = formatarNumero(totalArea);
 }
 
 function atualizarTabelaFazendas() {
@@ -212,6 +282,9 @@ function atualizarTabelaFazendas() {
         
         tbody.appendChild(tr);
     });
+    
+    // Após atualizar a tabela, atualizar o totalizador final
+    atualizarTotalizadorFinal();
 }
 
 function atualizarTabelaVencimentos() {
@@ -292,12 +365,12 @@ function atualizarGraficoAreas(data) {
         datasets: [{
             label: 'Área (ha)',
             data: [
-                data.total_hectares_documento,
-                data.total_area_consolidada,
-                data.total_area_produtiva,
-                data.total_area_uso,
-                data.total_prodes,
-                data.total_embargo
+                data.total_hectares_documento || 0,
+                data.total_area_consolidada || 0,
+                data.total_area_produtiva || 0,
+                data.total_area_uso || 0,
+                data.total_prodes || 0,
+                data.total_embargo || 0
             ],
             backgroundColor: [
                 'rgba(54, 162, 235, 0.6)',

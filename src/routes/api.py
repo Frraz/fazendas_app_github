@@ -4,6 +4,8 @@ from flask import Blueprint, jsonify, request
 from src.models.fazenda import db, Grupo, Pessoa, Fazenda, Documento, Area, Notificacao
 from datetime import datetime, timedelta
 import logging
+import json
+import os
 
 api_bp = Blueprint('api', __name__)
 
@@ -21,6 +23,7 @@ def get_pessoas():
 def get_fazendas():
     grupo_id = request.args.get('grupo_id', type=int)
     pessoa_id = request.args.get('pessoa_id', type=int)
+    fazenda_id = request.args.get('id', type=int)  # Adicionado parâmetro id
     
     query = Fazenda.query
     
@@ -28,6 +31,8 @@ def get_fazendas():
         query = query.filter_by(grupo_id=grupo_id)
     if pessoa_id:
         query = query.filter_by(pessoa_id=pessoa_id)
+    if fazenda_id:  # Filtrar por ID se fornecido
+        query = query.filter_by(id=fazenda_id)
     
     fazendas = query.all()
     
@@ -157,14 +162,15 @@ def get_estatisticas_areas():
         if a.hectares_embargo:
             total_embargo += a.hectares_embargo
     
+    # Retornar com as chaves corretas que o frontend espera
     return jsonify({
-        'total_fazendas': len(fazendas),
-        'total_hectares_documento': total_hectares_documento,
-        'total_area_produtiva': total_area_produtiva,
-        'total_area_consolidada': total_area_consolidada,
-        'total_area_uso': total_area_uso,
-        'total_prodes': total_prodes,
-        'total_embargo': total_embargo
+        "total_fazendas": len(fazendas),
+        "total_hectares_documento": total_hectares_documento,
+        "total_area_produtiva": total_area_produtiva,
+        "total_area_consolidada": total_area_consolidada,
+        "total_area_uso": total_area_uso,
+        "total_prodes": total_prodes,
+        "total_embargo": total_embargo
     })
 
 @api_bp.route('/estatisticas/documentos', methods=['GET'])
@@ -223,6 +229,59 @@ def get_estatisticas_documentos():
         'tipos': tipos_count,
         'vencimentos': vencimento_count
     })
+
+# Rota para recarregar dados do arquivo areas.json
+@api_bp.route('/reload/areas', methods=['GET'])
+def reload_areas():
+    try:
+        # Caminho para o arquivo areas.json
+        areas_file = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'areas.json')
+        
+        # Verificar se o arquivo existe
+        if not os.path.exists(areas_file):
+            return jsonify({'error': 'Arquivo areas.json não encontrado'}), 404
+        
+        # Ler o arquivo
+        with open(areas_file, 'r') as f:
+            areas_data = json.load(f)
+        
+        # Atualizar ou criar registros no banco de dados
+        for area_data in areas_data:
+            area = Area.query.filter_by(id=area_data['id']).first()
+            
+            if area:
+                # Atualizar área existente
+                area.inscricao_estadual = area_data.get('inscricao_estadual')
+                area.area_produtiva_ha = area_data.get('area_produtiva_ha')
+                area.capacidade_producao = area_data.get('capacidade_producao')
+                area.prodes = area_data.get('prodes')
+                area.hectares_prodes = area_data.get('hectares_prodes')
+                area.embargo = area_data.get('embargo')
+                area.hectares_embargo = area_data.get('hectares_embargo')
+                area.fazenda_id = area_data.get('fazenda_id')
+            else:
+                # Criar nova área
+                area = Area(
+                    id=area_data.get('id'),
+                    inscricao_estadual=area_data.get('inscricao_estadual'),
+                    area_produtiva_ha=area_data.get('area_produtiva_ha'),
+                    capacidade_producao=area_data.get('capacidade_producao'),
+                    prodes=area_data.get('prodes'),
+                    hectares_prodes=area_data.get('hectares_prodes'),
+                    embargo=area_data.get('embargo'),
+                    hectares_embargo=area_data.get('hectares_embargo'),
+                    fazenda_id=area_data.get('fazenda_id')
+                )
+                db.session.add(area)
+        
+        # Commit das alterações
+        db.session.commit()
+        
+        return jsonify({'message': 'Dados de áreas recarregados com sucesso', 'count': len(areas_data)}), 200
+    
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': f'Erro ao recarregar dados: {str(e)}'}), 500
 
 #####################################################################################################################################################
 
