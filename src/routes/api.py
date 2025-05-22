@@ -21,20 +21,86 @@ def get_pessoas():
 
 @api_bp.route('/fazendas', methods=['GET'])
 def get_fazendas():
+    # Obter parâmetros da requisição
     grupo_id = request.args.get('grupo_id', type=int)
     pessoa_id = request.args.get('pessoa_id', type=int)
-    fazenda_id = request.args.get('id', type=int)  # Adicionado parâmetro id
+    fazenda_id = request.args.get('id', type=int)
     
+    # Log para depuração
+    print(f"DEBUG - Parâmetros recebidos: id={fazenda_id}, grupo_id={grupo_id}, pessoa_id={pessoa_id}")
+    
+    # CASO 1: Se o ID da fazenda for fornecido, buscar apenas essa fazenda específica
+    if fazenda_id is not None:
+        # Buscar diretamente pelo ID usando get() que retorna None se não encontrar
+        fazenda = Fazenda.query.get(fazenda_id)
+        
+        # Se não encontrar a fazenda, retornar lista vazia
+        if not fazenda:
+            print(f"DEBUG - Fazenda com ID {fazenda_id} não encontrada")
+            return jsonify([])
+        
+        print(f"DEBUG - Fazenda encontrada: ID={fazenda.id}, Nome={fazenda.nome}")
+        
+        # Buscar documentos relacionados
+        documentos = Documento.query.filter_by(fazenda_id=fazenda.id).all()
+        docs_data = []
+        for doc in documentos:
+            doc_data = {
+                'id': doc.id,
+                'tipo': doc.tipo,
+                'numero': doc.numero,
+                'data_vencimento': doc.data_vencimento.strftime('%Y-%m-%d') if doc.data_vencimento else None,
+                'dias_para_vencimento': doc.dias_para_vencimento
+            }
+            docs_data.append(doc_data)
+        
+        # Buscar área relacionada
+        area = Area.query.filter_by(fazenda_id=fazenda.id).first()
+        area_data = None
+        if area:
+            area_data = {
+                'id': area.id,
+                'inscricao_estadual': area.inscricao_estadual,
+                'area_produtiva_ha': area.area_produtiva_ha,
+                'capacidade_producao': area.capacidade_producao,
+                'prodes': area.prodes,
+                'hectares_prodes': area.hectares_prodes,
+                'embargo': area.embargo,
+                'hectares_embargo': area.hectares_embargo
+            }
+        
+        # Dados da fazenda
+        fazenda_data = {
+            'id': fazenda.id,
+            'nome': fazenda.nome,
+            'tipo': fazenda.tipo,
+            'documento_dominio': fazenda.documento_dominio,
+            'matricula': fazenda.matricula,
+            'hectares_documento': fazenda.hectares_documento,
+            'car_ha': fazenda.car_ha,
+            'area_consolidada_ha': fazenda.area_consolidada_ha,
+            'area_uso_contrato': fazenda.area_uso_contrato,
+            'grupo_id': fazenda.grupo_id,
+            'grupo_nome': fazenda.grupo.nome if fazenda.grupo else None,
+            'pessoa_id': fazenda.pessoa_id,
+            'pessoa_nome': fazenda.pessoa.nome if fazenda.pessoa else None,
+            'documentos': docs_data,
+            'area': area_data
+        }
+        
+        # Retornar como lista com um único item
+        return jsonify([fazenda_data])
+    
+    # CASO 2: Se não houver ID específico, aplicar os filtros normais
     query = Fazenda.query
     
     if grupo_id:
         query = query.filter_by(grupo_id=grupo_id)
     if pessoa_id:
         query = query.filter_by(pessoa_id=pessoa_id)
-    if fazenda_id:  # Filtrar por ID se fornecido
-        query = query.filter_by(id=fazenda_id)
     
     fazendas = query.all()
+    print(f"DEBUG - Total de fazendas sem filtro por ID: {len(fazendas)}")
     
     result = []
     for f in fazendas:
