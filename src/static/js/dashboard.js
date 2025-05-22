@@ -115,6 +115,7 @@ function carregarEstatisticas() {
         .then(data => {
             atualizarResumo(data);
             atualizarGraficoAreas(data);
+            atualizarTotalizadorFinal(data); // Atualiza o totalizador final
         })
         .catch(error => console.error('Erro ao carregar estatísticas de áreas:', error));
     
@@ -137,6 +138,12 @@ function atualizarResumo(data) {
     document.getElementById('totalFazendas').textContent = data.total_fazendas;
     document.getElementById('areaTotal').textContent = formatarNumero(data.total_hectares_documento);
     document.getElementById('areaProdutiva').textContent = formatarNumero(data.total_area_produtiva);
+}
+
+// Nova função para atualizar o totalizador final
+function atualizarTotalizadorFinal(data) {
+    document.getElementById('totalFazendasFinal').textContent = data.total_fazendas;
+    document.getElementById('areaTotalFinal').textContent = formatarNumero(data.total_hectares_documento);
 }
 
 function atualizarTabelaFazendas() {
@@ -445,22 +452,18 @@ function mostrarDetalhesFazenda(fazenda) {
             
             if (doc.data_vencimento) {
                 const diasRestantes = doc.dias_para_vencimento;
-                let statusClass = '';
+                let status = 'Válido';
+                let classe = 'status-ok';
                 
                 if (diasRestantes < 0) {
-                    statusClass = 'status-vencido';
+                    status = 'Vencido';
+                    classe = 'status-vencido';
                 } else if (diasRestantes <= 30) {
-                    statusClass = 'status-proximo';
-                } else {
-                    statusClass = 'status-ok';
+                    status = 'A vencer';
+                    classe = 'status-proximo';
                 }
                 
-                adicionarLinhaTabelaDetalhes(
-                    tabelaDetalhesDocumentos, 
-                    'Status', 
-                    diasRestantes < 0 ? 'Vencido' : `${diasRestantes} dias restantes`,
-                    statusClass
-                );
+                adicionarLinhaTabelaDetalhes(tabelaDetalhesDocumentos, `Status ${doc.tipo}`, `<span class="${classe}">${status}</span>`);
             }
         });
     } else {
@@ -472,19 +475,35 @@ function mostrarDetalhesFazenda(fazenda) {
     modal.show();
 }
 
+function adicionarLinhaTabelaDetalhes(tabela, label, valor) {
+    const tr = document.createElement('tr');
+    
+    const tdLabel = document.createElement('td');
+    tdLabel.innerHTML = `<strong>${label}:</strong>`;
+    tr.appendChild(tdLabel);
+    
+    const tdValor = document.createElement('td');
+    tdValor.innerHTML = valor;
+    tr.appendChild(tdValor);
+    
+    tabela.appendChild(tr);
+}
+
 function abrirModalNotificacao(documento) {
-    // Preencher campos do modal
     document.getElementById('documentoId').value = documento.id;
-    document.getElementById('assuntoEmail').value = `Aviso de Vencimento: ${documento.tipo} - ${documento.fazenda_nome}`;
+    
+    // Preencher campos do formulário com valores padrão
+    document.getElementById('emailDestinatario').value = '';
+    document.getElementById('assuntoEmail').value = `Lembrete de Vencimento: ${documento.tipo} - ${documento.fazenda_nome}`;
     
     const conteudo = `Prezado(a),
 
-Informamos que o documento ${documento.tipo} da fazenda ${documento.fazenda_nome} vencerá em ${documento.dias_para_vencimento} dias (${formatarData(documento.data_vencimento)}).
+Informamos que o documento ${documento.tipo} (${documento.numero}) da fazenda ${documento.fazenda_nome} vencerá em ${documento.dias_para_vencimento} dias (${formatarData(documento.data_vencimento)}).
 
-Por favor, providencie a renovação o quanto antes.
+Por favor, providencie a renovação do documento com antecedência para evitar problemas.
 
 Atenciosamente,
-Sistema de Controle de Documentação de Fazendas`;
+Equipe de Controle de Documentação`;
     
     document.getElementById('conteudoEmail').value = conteudo;
     
@@ -535,39 +554,30 @@ function enviarNotificacao() {
 
 // Funções de exportação
 function exportarPDF() {
-    alert('Exportação para PDF será implementada em breve.');
+    alert('Funcionalidade de exportação para PDF em desenvolvimento.');
 }
 
 function exportarExcel() {
-    alert('Exportação para Excel será implementada em breve.');
+    alert('Funcionalidade de exportação para Excel em desenvolvimento.');
 }
 
-// Funções auxiliares
-function adicionarLinhaTabelaDetalhes(tabela, label, valor, classe = '') {
-    const tr = document.createElement('tr');
-    
-    const tdLabel = document.createElement('td');
-    tdLabel.style.fontWeight = 'bold';
-    tdLabel.textContent = label;
-    tr.appendChild(tdLabel);
-    
-    const tdValor = document.createElement('td');
-    tdValor.textContent = valor;
-    
-    if (classe) {
-        tdValor.className = classe;
+// Funções utilitárias
+function formatarNumero(numero) {
+    if (numero === null || numero === undefined) {
+        return '-';
     }
     
-    tr.appendChild(tdValor);
-    
-    tabela.appendChild(tr);
-}
-
-function formatarNumero(numero) {
-    return numero.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return numero.toLocaleString('pt-BR', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
 }
 
 function formatarData(dataString) {
+    if (!dataString) {
+        return '-';
+    }
+    
     const data = new Date(dataString);
     return data.toLocaleDateString('pt-BR');
 }
