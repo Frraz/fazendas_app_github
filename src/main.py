@@ -69,6 +69,31 @@ def api_fazendas():
     
     return jsonify(fazendas)
 
+@app.route('/api/fazenda', methods=['POST'])
+def criar_fazenda():
+    import json
+    novo_dado = request.json
+
+    if not novo_dado.get('nome'):
+        return jsonify({'error': 'Nome é obrigatório'}), 400
+
+    caminho = os.path.join(DATA_DIR, 'fazendas.json')
+    
+    # Carregar dados existentes
+    with open(caminho, 'r', encoding='utf-8') as f:
+        fazendas = json.load(f)
+    
+    # Gerar novo ID
+    novo_id = max([f['id'] for f in fazendas], default=0) + 1
+    novo_dado['id'] = novo_id
+
+    # Adicionar e salvar
+    fazendas.append(novo_dado)
+    with open(caminho, 'w', encoding='utf-8') as f:
+        json.dump(fazendas, f, ensure_ascii=False, indent=2)
+    
+    return jsonify(novo_dado), 201
+
 @app.route('/api/fazendas/<int:fazenda_id>')
 def api_fazenda(fazenda_id):
     import json
@@ -405,3 +430,4 @@ def index():
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
+    

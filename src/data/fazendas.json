@@ -752,5 +752,28 @@
     "area_uso_contrato": null,
     "grupo_id": 4,
     "pessoa_id": null
+  },
+  {
+    "nome": "FAZENDA FERRAZ",
+    "tipo": "",
+    "grupo_id": null,
+    "pessoa_id": null,
+    "documento_dominio": "",
+    "matricula": "",
+    "hectares_documento": null,
+    "car_ha": "",
+    "area_consolidada_ha": null,
+    "area_uso_contrato": null,
+    "documentos": [],
+    "area": {
+      "inscricao_estadual": "",
+      "area_produtiva_ha": null,
+      "capacidade_producao": "",
+      "prodes": "",
+      "hectares_prodes": null,
+      "embargo": "",
+      "hectares_embargo": null
+    },
+    "id": 59
   }
 ]
